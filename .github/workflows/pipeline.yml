@@ -1,0 +1,41 @@
+name: Pipeline MTSS
+
+# Partenza automatica a ogni push/pull req
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1) scarica il codice dal repository
+    - name: Checkout del codice
+      uses: actions/checkout@v4
+
+    # 2) prepara java
+    - name: Setup Java JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    # 3) compila 
+    - name: Compilazione
+      run: mvn compile
+
+    # 4) testa 
+    - name: Test di Unità
+      run: mvn test
+
+    # 5) analisi statica 
+    - name: Analisi Statica (Checkstyle)
+      run: mvn checkstyle:check
+
+    # 6) Report coverage e invio a coveralls 
+    - name: Code Coverage e Coveralls
+      run: mvn verify jacoco:report coveralls:report -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }}
