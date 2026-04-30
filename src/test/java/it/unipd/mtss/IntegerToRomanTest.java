@@ -23,11 +23,26 @@ public class IntegerToRomanTest {
 
     @Test
     public void testConvert_NumberTwo_ReturnsII() {
-        assertEquals("II", IntegerToRoman.convert(2));
+        assertEquals("II", IntegerToRoman.convert(2)); //AAA
     }
 
     @Test
     public void testConvert_NumberThree_ReturnsIII() {
         assertEquals("III", IntegerToRoman.convert(3));
+    }
+
+    @Test
+    public void testConvert_NumberFour_ReturnsIV() {
+        assertEquals("IV", IntegerToRoman.convert(4));
+    }
+
+    @Test
+    public void testConvert_NumberFive_ReturnsV() {
+        assertEquals("V", IntegerToRoman.convert(5));
+    }
+
+    @Test
+    public void testConvert_NumberSix_ReturnsVI() {
+        assertEquals("VI", IntegerToRoman.convert(6));
     }
 }
