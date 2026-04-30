@@ -6,16 +6,21 @@
 //
 package it.unipd.mtss;
 
-public class IntegerToRoman {
-    
-    public static String convert(int number) {
-        if (number == 1) {
-            return "I";
-        } else if (number == 2) {
-            return "II";
-        } else if (number == 3) {
-            return "III";
+public class IntegerToRoman { 
+
+    public static String convert(int number) { 
+        int[] values = {5, 4, 1}; 
+        String[] romanLetters = {"V", "IV", "I"}; //valori chiave 
+        
+        StringBuilder roman = new StringBuilder();
+
+        for (int i = 0; i < values.length; i++) {
+            while (number >= values[i]) {
+                roman.append(romanLetters[i]);
+                number -= values[i];
+            }
         }
-        return null;
+        
+        return roman.toString();
     }
 }
